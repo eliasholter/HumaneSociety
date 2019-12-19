@@ -179,7 +179,8 @@ namespace HumaneSociety
 
         internal static Animal GetAnimalByID(int id)
         {
-            throw new NotImplementedException();
+            var Animal = db.Animals.Where(a => a.AnimalId == id).Select(a => a);
+            return Animal(Animal);
         }
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
@@ -189,7 +190,9 @@ namespace HumaneSociety
 
         internal static void RemoveAnimal(Animal animal)
         {
-            throw new NotImplementedException();
+            int animalId = animal.AnimalId;
+            db.Animals.DeleteOnSubmit(animalId);
+            db.SubmitChanges();
         }
         
         // TODO: Animal Multi-Trait Search
